@@ -11,7 +11,7 @@
     <body>
     <nav>
         <ul>
-            <li><a id="req" class="active_button" href="#">Requests</a></li>
+            <li><a id="req" href="#">Requests</a></li>
             <li><a id= "pages" href="#">Pages</a></li>
             <div class="date-menu">
                 <li><a href="#"><</a></li>
@@ -21,7 +21,7 @@
             <li id="icon" class="dropdown">
                 <i class="material-icons" style="font-size:24px;color:white;padding:8px;">format_list_bulleted</i>
                 <ul class="dropdown-content">
-                    <li><a href="#">Table view</a></li>
+                    <li onclick="stateFunction()"><a id="table/chart" href="#">...</a></li>
                     <li><a href="#">Landscape</a></li>
                     <li><a href="#">Log out</a></li>
                 </ul>
@@ -29,5 +29,6 @@
         </ul>
     </nav>
             {%block body%}{%endblock%}
+
     </body>
 </html>
