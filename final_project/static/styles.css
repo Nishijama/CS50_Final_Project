@@ -1,0 +1,135 @@
+/*Color palette:*/
+:root {
+--acc1: #051C2C;
+--acc2: #00A9F4;
+--acc3: #1F40E6;
+--acc4: #AAE6F0;
+--acc5: #3C96B4;
+}
+
+/*LAYOUT*/
+body{
+    background: #f2f2f2;
+}
+
+  .container {
+    z-index:0;
+    display: flex;
+    flex-direction: row;
+
+  }
+
+    .container div{
+      /*border: 1px black solid;*/
+      padding: 20px;
+      margin:20px;
+      border-radius:20px;
+      background: white;
+    }
+
+      .PRC {
+      flex: 4;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      }
+
+      .Tasks {
+      flex: 1;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+      }
+
+        .chart-container {
+          text-align: center;
+        }
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+
+/*NAVBAR*/
+
+nav {
+  display: flex;
+  flex-direction: column;
+}
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    background-color: var(--acc1);
+  }
+
+  li {
+    float: left;
+
+  }
+
+  li a, p {
+    display: block;
+    color: white;
+    text-align: center;
+    font-family: sans-serif;
+    margin: 0px;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  .active_button {
+    background-color: blue;
+    background-color: var(--acc3);
+  }
+
+  li a:hover {
+    background-color: blue;
+    background-color: var(--acc2);
+    }
+
+  .date-menu {
+    margin: auto;
+    width: 400px;
+  }
+
+  #date {
+      background: white;
+      color: black;
+      width: 200px;
+  }
+
+  #icon{
+    float: right;
+  }
+  /*Dropdown*/
+  .dropdown{
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    flex: 1;
+    display: none;
+    position: absolute;
+    top:35px;
+    right:0px;
+    background-color: #f9f9f9;
+    /*min-width: 160px;*/
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #f1f1f1}
+
+  /* Show the dropdown menu on hover */
+  #icon:hover .dropdown-content {
+    display: block;
+  }
+
+

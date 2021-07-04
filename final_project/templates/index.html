@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<main>
+    <div class="container">
+        <div class="PRC">
+            <div class="PRC-content">
+                <h1>PRC</h1>
+                <div class=chart-container>
+                    <img src="static/PRC-chart.jpg" alt="PRC chart">
+                    <!--<div id="PRCchart" style="width: 100%; float:left"></div>-->
+                </div>
+            </div>
+        </div>
+        <div class="Tasks">
+            <div class="Tasks-content">
+                <h1>Tasks</h1>
+                <div class=chart-container>
+                    <img src="static/tasks-chart.PNG" alt="Tasks chart">
+                    <!--<div id="Taskschart" style="width: 100%; float:left"></div>-->
+                </div>
+                <hr>
+                <h1>Shifts</h1>
+                <div class=chart-container>
+                    <img src="static/shifts-chart.PNG" alt="Shifts chart">
+                    <!--<div id="Taskschart" style="width: 100%; float:left"></div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
