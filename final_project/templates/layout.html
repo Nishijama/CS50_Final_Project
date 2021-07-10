@@ -5,23 +5,21 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href='/static/styles.css' rel="stylesheet">
         <title>Dashboard</title>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <scrip src="static/code.js"></scrip>
     </head>
     <body>
     <nav>
         <ul>
-            <li><a id="req" class="active_button" href="#">Requests</a></li>
-            <li><a id= "pages" href="#">Pages</a></li>
+            <li><a class="navButtons" id="reqButton" href="#">Requests</a></li>
+            <li><a class="navButtons" id="pagesButton" href="#">Pages</a></li>
             <div class="date-menu">
                 <li><a href="#"><</a></li>
-                <li><p id="date">June</p></li>
+                <li><p id="date">...</p></li>
                 <li><a href="#">></a></li>
             </div>
             <li id="icon" class="dropdown">
                 <i class="material-icons" style="font-size:24px;color:white;padding:8px;">format_list_bulleted</i>
                 <ul class="dropdown-content">
-                    <li><a href="#">Table view</a></li>
+                    <li><a id="table/chart" href="#">Table view</a></li>
                     <li><a href="#">Landscape</a></li>
                     <li><a href="#">Log out</a></li>
                 </ul>
@@ -29,5 +27,7 @@
         </ul>
     </nav>
             {%block body%}{%endblock%}
+
+    <script src="static/code.js"></script>
     </body>
 </html>

@@ -1,88 +1,89 @@
 
-type="text/javascript"
 
-      // Load Charts and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+//default setup
+var type = 'requests';
+document.getElementById("reqButton").style.backgroundColor = "#00A9F4";
 
-      // Draw the pie chart for Sarah's pizza when Charts is loaded.
-      google.charts.setOnLoadCallback(drawSarahChart);
+var state = 'chart';
+document.getElementById("table/chart").innerHTML = 'Table view';
 
-      // Draw the pie chart for the Anthony's pizza when Charts is loaded.
-      google.charts.setOnLoadCallback(drawAnthonyChart);
+document.getElementById("prcImage").src="static/requestChart.png";
 
-      // Callback that draws the pie chart for Sarah's pizza.
-      function drawSarahChart() {
+var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+var d = new Date();
+var n = d.getMonth();
+document.getElementById("date").innerHTML = months[n];
 
-        // Create the data table for Sarah's pizza.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['SPOC', 1],
-          ['Reservations', 1],
-          ['DT S/M', 2],
-          ['DT D/A', 2],
-        ]);
+//---------------
+//requests/pages settup
 
-        // Set options for Sarah's pie chart.
-        var options = {title:'Tasks this month',
-                       width:400,
-                       height:300,
-                       colors: ['#051C2C', '#00A9F4','#1F40E6', '#AAE6F0']
-        };
+document.getElementById('reqButton').addEventListener('click', function(){
+    document.getElementById("reqButton").style.backgroundColor = "#00A9F4";
+    document.getElementById("pagesButton").style.backgroundColor = "#051C2C";
 
-        // Instantiate and draw the chart for Sarah's pizza.
-        var chart = new google.visualization.PieChart(document.getElementById('Taskschart'));
-        chart.draw(data, options);
-      }
+    if (state == 'chart'){
+        document.getElementById("prcImage").src="static/requestChart.png";
+    }
+    else if (state == 'table') {
+        document.getElementById("prcImage").src="static/requestTable.png";
+    }
 
-      // Callback that draws the pie chart for Anthony's pizza.
-      function drawAnthonyChart() {
+    type = 'requests';
+})
 
-        // Create the data table for Anthony's pizza.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Date');
-        data.addColumn('number', 'Requests');
-        data.addRows([
-                ['1', 2],
-                ['2', 2],
-                ['3', 2],
-                ['4', 0],
-                ['5', 3],
-                ['6', 2],
-                ['7', 2],
-                ['8', 2],
-                ['9', 0],
-                ['10', 3],
-                ['11', 2],
-                ['12', 2],
-                ['13', 2],
-                ['14', 0],
-                ['15', 3],
-                ['16', 2],
-                ['17', 2],
-                ['18', 2],
-                ['19', 0],
-                ['20', 3],
-                ['21', 2],
-                ['22', 2],
-                ['23', 2],
-                ['24', 0],
-                ['25', 3],
-                ['26', 2],
-                ['27', 2],
-                ['28', 2],
-                ['29', 0],
-                ['30', 3],
-                ]);
+document.getElementById('pagesButton').addEventListener('click', function() {
+    document.getElementById("pagesButton").style.backgroundColor = "#00A9F4";
+    document.getElementById("reqButton").style.backgroundColor = "#051C2C";
 
-        // Set options for Anthony's pie chart.
-        var options = {width:1000,
-                       height:300,
-                       colors: ['#051C2C']
-        };
+    if (state == 'chart'){
+        document.getElementById("prcImage").src="static/pagesChart.png";
+    }
+    else if (state == 'table') {
+        document.getElementById("prcImage").src="static/pagesTable.png";
+    }
 
-        // Instantiate and draw the chart for Anthony's pizza.
-        var chart = new google.visualization.ColumnChart(document.getElementById('PRCchart'));
-        chart.draw(data, options);
-      }
+    type = 'pages'
+})
+
+//-------------
+//table vs chart settup
+
+document.getElementById('table/chart').addEventListener('click', function() {
+
+    if (state == 'chart'){
+
+        document.getElementById("table/chart").innerHTML = 'Chart view';
+
+        if (type == 'requests'){
+            document.getElementById("prcImage").src="static/requestTable.png";
+        }
+        else if (type == 'pages') {
+            document.getElementById("prcImage").src="static/pagesTable.png";
+        }
+        state = 'table';
+    }
+
+    else if (state == 'table') {
+
+        document.getElementById("table/chart").innerHTML = 'Table view';
+
+        if (type == 'requests'){
+            document.getElementById("prcImage").src="static/requestChart.png";
+        }
+        else if (type == 'pages') {
+            document.getElementById("prcImage").src="static/pagesChart.png";
+        }
+        state = 'chart';
+    }
+})
+
+//----------
+//Pop-up setup
+
+document.getElementById('editButton').addEventListener('click', function(){
+  document.querySelector('.modalBg').style.display = 'flex';
+})
+
+document.querySelector('.close').addEventListener('click', function() {
+  document.querySelector('.modalBg').style.display = 'none';
+})

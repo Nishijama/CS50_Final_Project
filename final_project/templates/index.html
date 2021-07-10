@@ -7,26 +7,46 @@
             <div class="PRC-content">
                 <h1>PRC</h1>
                 <div class=chart-container>
-                    <img src="static/PRC-chart.jpg" alt="PRC chart">
+                    <img id="prcImage" src="static/placeholder.png" alt="PRC chart">
                     <!--<div id="PRCchart" style="width: 100%; float:left"></div>-->
                 </div>
             </div>
+            <input id="editButton" type="button" value="Add records" style="font-size: 26px;padding:20px;font-weight:bold;color:#00A9F4;border-radius:20px;cursor:pointer;">
         </div>
-        <div class="Tasks">
-            <div class="Tasks-content">
+        <div class="TasksAndShifts">
+            <div id="tasksContent">
                 <h1>Tasks</h1>
                 <div class=chart-container>
-                    <img src="static/tasks-chart.PNG" alt="Tasks chart">
+                    <img id="tasksImage" src="static/tasks-chart.PNG" alt="Tasks chart">
                     <!--<div id="Taskschart" style="width: 100%; float:left"></div>-->
                 </div>
-                <hr>
+            </div>
+            <div><hr></div>
+            <div id="shiftsContent">
                 <h1>Shifts</h1>
                 <div class=chart-container>
-                    <img src="static/shifts-chart.PNG" alt="Shifts chart">
+                    <img id="shiftsImage" src="static/shifts-chart.PNG" alt="Shifts chart">
                     <!--<div id="Taskschart" style="width: 100%; float:left"></div>-->
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modalBg">
+      <div id="update_form">
+        <div class="close">+</div>
+      <form>
+
+          <input type="number" placeholder="Requests" style="width:70px;padding:7px;">
+          <input type="number" placeholder="Pages" style="width:70px;padding:7px;">
+          <input class="input_text" type="date" placeholder="Day" style="width:70px;">
+          <input type="submit">
+        <hr>
+        <input type="button" value="Choose a file" style="width:110px;">
+        <input type="text" placeholder="File path"style="width:132px;">
+        <input type="submit">
+        </form>
+      </div>
     </div>
 </main>
 
