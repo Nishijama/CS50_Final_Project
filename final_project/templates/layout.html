@@ -2,7 +2,9 @@
 <html>
     <head>
         <meta name = "viewport" content="initial-scale=1, width=device-width">
+        <!--import Google Charts API-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--import stylesheet-->
         <link href='/static/styles.css' rel="stylesheet">
         <title>Dashboard</title>
     </head>
@@ -12,22 +14,23 @@
             <li><a class="navButtons" id="reqButton" href="#">Requests</a></li>
             <li><a class="navButtons" id="pagesButton" href="#">Pages</a></li>
             <div class="date-menu">
-                <li><a href="#"><</a></li>
+                <li><a id="prevMonth" href="#"><</a></li>
                 <li><p id="date">...</p></li>
-                <li><a href="#">></a></li>
+                <li><a id="nextMonth" href="#">></a></li>
             </div>
             <li id="icon" class="dropdown">
                 <i class="material-icons" style="font-size:24px;color:white;padding:8px;">format_list_bulleted</i>
                 <ul class="dropdown-content">
                     <li><a id="table/chart" href="#">Table view</a></li>
                     <li><a href="#">Landscape</a></li>
-                    <li><a href="#">Log out</a></li>
+                    <li><a href="/login">Log out</a></li>
                 </ul>
             </li>
         </ul>
     </nav>
             {%block body%}{%endblock%}
 
-    <script src="static/code.js"></script>
     </body>
+    <!--import JS code-->
+    <script src="static/code.js"></script>
 </html>

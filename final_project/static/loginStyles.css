@@ -1,0 +1,49 @@
+/*Color palette:*/
+:root {
+--acc1: #051C2C;
+--acc2: #00A9F4;
+--acc3: #1F40E6;
+--acc4: #AAE6F0;
+--acc5: #3C96B4;
+}
+
+body {
+background-color: var(--acc1);
+font-family:sans-serif;
+}
+
+.container {
+    height:100%;
+    width:100%;
+    position: absolute;
+    display:flex;
+}
+
+.loginBox {
+    margin:auto;
+    padding: 30px 60px;
+    text-align: center;
+    /*width: 500px;*/
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.input {
+    height:40px;
+    width: 300px;
+    font-size: 16px;
+    margin:10px;
+}
+
+#logInButton, #registerButton {
+background-color: var(--acc2);
+color: white;
+border:none;
+padding:5px;
+border-radius:5px;
+}
+
+a {
+    text-decoration:none;
+    color: gray;
+}
