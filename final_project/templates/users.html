@@ -1,20 +1,12 @@
-<!DOCTYPE html>
+{% extends "secondaryLayout.html" %}
 
+{% block body %}
 
-<head>
-	<title>Users</title>
-    <link href='/static/loginStyles.css' rel="stylesheet">
-</head>
-<body>
-<div class="container">
-	<div class='loginBox'>
-		<h1>Registered users:</h1>
-        <ul>
-            {% for row in rows %}
-                <li>{{ row["name"] }} ({{ row["password_hash"] }})</li>
-            {% endfor %}
-        </ul>
-	</div>
-</div>
-</body>
+<h1>Registered users:</h1>
+<ul>
+    {% for row in rows %}
+        <li>{{ row["name"] }} ({{ row["password_hash"] }})</li>
+    {% endfor %}
+</ul>
 
+{% endblock %}

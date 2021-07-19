@@ -1,23 +1,16 @@
-<!DOCTYPE html>
+{% extends "secondaryLayout.html" %}
 
+{% block body %}
 
-<head>
-	<title>Welcome</title>
-    <link href='/static/loginStyles.css' rel="stylesheet">
-</head>
-<body>
-<div class="container">
-	<div class='loginBox'>
-		<h1>Welcome</h1>
-		<h2>To your personal dashboard app!</h2>
-		<form>
-			<input class="input" type="text" name="Username" placeholder="Username"><br>
-			<input class="input" type="text" name="Password" placeholder="Password"><br>
-			<input class="input" type="text" name="Password" placeholder="Confirm password"><br>
-			<input class="input" id="registerButton" type="submit" name="submit" value="Register"> <br>
-			<a href="/login">Back</a>
-		</form>
-	</div>
-</div>
-</body>
+<h1>Welcome</h1>
+<h2>To your personal dashboard app!</h2>
+<form action="/register" method="post">
+	<input required class="input" type="text" name="Username" placeholder="Username"><br>
+	<input required class="input" type="password" name="Password" placeholder="Password"><br>
+	<input required class="input" type="password" name="Confirmation" placeholder="Confirm password"><br>
+	<input class="input" id="registerButton" type="submit" name="submit" value="Register"> <br>
+	<a href="/login">Back</a>
+</form>
+
+{% endblock %}
 
