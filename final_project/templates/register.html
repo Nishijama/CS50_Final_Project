@@ -13,4 +13,23 @@
 </form>
 
 {% endblock %}
+<head>
+	<title>Welcome</title>
+    <link href='/static/loginStyles.css' rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class='loginBox'>
+		<h1>Welcome</h1>
+		<h2>To your personal dashboard app!</h2>
+		<form action="/register" method="post">
+			<input class="input" type="text" name="Username" placeholder="Username"><br>
+			<input class="input" type="text" name="Password" placeholder="Password"><br>
+			<input class="input" type="text" name="Confirm_password" placeholder="Confirm password"><br>
+			<input class="input" id="registerButton" type="submit" name="submit" value="Register"> <br>
+			<a href="/login">Back</a>
+		</form>
+	</div>
+</div>
+</body>
 

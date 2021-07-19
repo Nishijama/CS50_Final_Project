@@ -6,6 +6,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from flask_session import Session
 from functools import wraps
+from hash import make_pw_hash, check_pw_hash
+
 
 # Configure application
 app = Flask(__name__)
