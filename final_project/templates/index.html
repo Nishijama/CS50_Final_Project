@@ -124,18 +124,20 @@
         <div class="close">+</div>
 
         <form class="add_form" action="/?month={{ month }}" method="post">
-          <input name="requests" required type="number" min="0" placeholder="Requests" style="width:70px;padding:7px;">
-          <input name="pages" required type="number" min="0" placeholder="Pages" style="width:70px;padding:7px;">
+          <input name="requests" required type="number" min="0" max="999" placeholder="Requests" style="width:70px;padding:7px;">
+          <input name="pages" required type="number" min="0" max="999" placeholder="Pages" style="width:70px;padding:7px;">
           <input name="date" required class="input_text" type="date" min="{{ year }}-01-01" max="{{ year }}-12-31" style="width:150px;">
           <br>
-          <select name="shift" style="width:86px;padding:7px;margin:10px 0px;border-radius:5px;">
+          <select required name="shift" style="width:86px;padding:7px;margin:10px 0px;border-radius:5px;">
+              <option value="" disabled selected style="color:silver;">Shift</option>
               <option>Early</option>
               <option>Office</option>
               <option>Middle</option>
               <option>Late</option>
               <option>4x10</option>
           </select>
-          <select name="task" style="width:252px;padding:7px;marign:10px 0px;border-radius:5px;">
+          <select required name="task" style="width:252px;padding:7px;marign:10px 0px;border-radius:5px;">
+              <option value="" disabled selected style="color:silver;">Task</option>
               <option>Small/Medium</option>
               <option>Assignment</option>
               <option>Reservations</option>
@@ -242,30 +244,38 @@ function drawRequestsChart() {
 };
 
 document.getElementById('reqButton').addEventListener('click', function(){
-document.getElementById("pagesButton").style.color = "silver";
-document.getElementById("pagesButton").style.fontWeight = "normal";
-document.getElementById("pagesButton").style.borderBottom = "2px solid silver";
-document.getElementById("reqButton").style.color = "black";
-document.getElementById("reqButton").style.fontWeight = "bold";
-document.getElementById("reqButton").style.borderBottom = "3px solid blue";
-document.getElementById("bigStatTotal").innerHTML = {{ topStatReqTotal }};
-// https://www.codegrepper.com/code-examples/javascript/format+zero+number+after+dot+js
-document.getElementById("bigStatAverage").innerHTML = parseFloat({{ topStatReqAvg }}).toFixed(1);
-drawRequestsChart();
-type = 'requests';
+
+    document.getElementById("pagesButton").style.color = "silver";
+    document.getElementById("pagesButton").style.fontWeight = "normal";
+    document.getElementById("pagesButton").style.borderBottom = "2px solid silver";
+
+    document.getElementById("reqButton").style.color = "black";
+    document.getElementById("reqButton").style.fontWeight = "bold";
+    document.getElementById("reqButton").style.borderBottom = "3px solid blue";
+
+    document.getElementById("bigStatTotal").innerHTML = {{ topStatReqTotal }};
+    document.getElementById("bigStatAverage").innerHTML = parseFloat({{ topStatReqAvg }}).toFixed(1);
+    // https://www.codegrepper.com/code-examples/javascript/format+zero+number+after+dot+js
+
+    drawRequestsChart();
+    type = 'requests';
 });
 
 document.getElementById('pagesButton').addEventListener('click', function() {
-document.getElementById("reqButton").style.color = "silver";
-document.getElementById("reqButton").style.fontWeight = "normal";
-document.getElementById("reqButton").style.borderBottom = "2px solid silver";
-document.getElementById("pagesButton").style.color = "black";
-document.getElementById("pagesButton").style.fontWeight = "bold";
-document.getElementById("pagesButton").style.borderBottom = "3px solid blue";
-document.getElementById("bigStatTotal").innerHTML = {{ topStatPageTotal }};
-document.getElementById("bigStatAverage").innerHTML = parseFloat({{ topStatPageAvg }}).toFixed(1);
-drawPagesChart();
-type = 'pages';
+
+    document.getElementById("reqButton").style.color = "silver";
+    document.getElementById("reqButton").style.fontWeight = "normal";
+    document.getElementById("reqButton").style.borderBottom = "2px solid silver";
+
+    document.getElementById("pagesButton").style.color = "black";
+    document.getElementById("pagesButton").style.fontWeight = "bold";
+    document.getElementById("pagesButton").style.borderBottom = "3px solid blue";
+
+    document.getElementById("bigStatTotal").innerHTML = {{ topStatPageTotal }};
+    document.getElementById("bigStatAverage").innerHTML = parseFloat({{ topStatPageAvg }}).toFixed(1);
+
+    drawPagesChart();
+    type = 'pages';
 });
 
 

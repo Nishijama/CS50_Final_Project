@@ -69,18 +69,29 @@ def index():
         topStatQuery = db.execute("Select SUM(requests) AS rTotal, ROUND(AVG(requests),2) AS rAverage, SUM(pages) AS pTotal, ROUND(AVG(pages),2) AS pAverage FROM statistics WHERE user_id = ? AND date BETWEEN ? AND ? ORDER BY date", user_id, first_of_month, last_of_month)
         shiftsQuery = db.execute("SELECT COUNT(user_id), shift FROM statistics WHERE shift IS NOT NULL AND user_id = ? AND date BETWEEN ? AND ? GROUP BY shift", user_id, first_of_month, last_of_month)
         tasksQuery = db.execute("SELECT COUNT(user_id), task FROM statistics WHERE task IS NOT NULL AND user_id = ? AND date BETWEEN ? AND ? GROUP BY task", user_id, first_of_month, last_of_month)
+        print(topStatQuery)
 
         # Handle data for Top Stats
         for row in topStatQuery:
+
             topStatReqTotal = row["rTotal"]
-            topStatReqAvg = str(row["rAverage"])
+            if topStatReqTotal == None:
+                topStatReqTotal = 0
+            print(topStatReqTotal)
+
+            topStatReqAvg = row["rAverage"]
+            if topStatReqAvg == None:
+                topStatReqAvg = 0.0
+            print(topStatReqAvg)
+
             topStatPageTotal = row["pTotal"]
-            topStatPageAvg = str(row["pAverage"])
-            
-        print(topStatReqTotal)
-        print(topStatReqAvg)
-        print(topStatPageTotal)
-        print(topStatPageAvg)
+            if topStatPageTotal == None:
+                topStatPageTotal = 0
+
+            topStatPageAvg = row["pAverage"]
+            if topStatPageAvg == None:
+                topStatPageAvg = 0.0
+                return render_template("empty_index.html",month=month, year=year)
 
         # Handle data for charts
         statistics_chart_requests_data = [ ['Day', 'Requests'] ]
@@ -161,10 +172,25 @@ def index():
 
         # Handle data for Top Stats
         for row in topStatQuery:
+
             topStatReqTotal = row["rTotal"]
-            topStatReqAvg = str(row["rAverage"])
+            if topStatReqTotal == None:
+                topStatReqTotal = 0
+            print(topStatReqTotal)
+
+            topStatReqAvg = row["rAverage"]
+            if topStatReqAvg == None:
+                topStatReqAvg = 0.0
+            print(topStatReqAvg)
+
             topStatPageTotal = row["pTotal"]
-            topStatPageAvg = str(row["pAverage"])
+            if topStatPageTotal == None:
+                topStatPageTotal = 0
+
+            topStatPageAvg = row["pAverage"]
+            if topStatPageAvg == None:
+                topStatPageAvg = 0.0
+                return render_template("empty_index.html",month=month, year=year)
 
         # andle data for charts
         statistics_chart_requests_data = [ ['Day', 'Requests'] ]
@@ -188,7 +214,7 @@ def index():
             chart_data.extend([[row["date"][-2:], row["requests"], row["pages"]]])
 
         # Return template
-        return render_template("index.html", statisticsQuery=statisticsQuery, topStatQuery=topStatQuery, shiftsQuery=shiftsQuery, tasksQuery=tasksQuery, month=month,
+        return render_template("index.html", statisticsQuery=statisticsQuery, topStatQuery=topStatQuery, shiftsQuery=shiftsQuery, tasksQuery=tasksQuery,year=year, month=month,
                                              statistics_chart_requests_data=statistics_chart_requests_data, statistics_chart_pages_data=statistics_chart_pages_data,
                                              tasks_chart_data=tasks_chart_data, shifts_chart_data=shifts_chart_data, topStatReqTotal=topStatReqTotal,
                                              topStatReqAvg=topStatReqAvg, topStatPageTotal=topStatPageTotal, topStatPageAvg=topStatPageAvg)
@@ -258,7 +284,6 @@ def register():
 @app.route("/landscape", methods=["GET"])
 @login_required
 def landscape():
-    # user_id = session["user_id"]
 
     # Prepare dates
     month = str(request.args.get("month"))
@@ -271,9 +296,9 @@ def landscape():
                                 "ROUND(AVG(statistics.pages), 2) AS pAverage "
                                 "FROM users "
                                 "LEFT OUTER JOIN statistics ON statistics.user_id = users.id "
-                                "WHERE statistics.date BETWEEN ? AND ? "
-                                "GROUP BY user_id;", first_of_month, last_of_month)
-
+                                "AND statistics.date BETWEEN ? AND ? "
+                                "GROUP BY users.id;", first_of_month, last_of_month)
+    print(landscapeQuery)
     # Prepare data for the charts
     landscape_chart_data = [ ['User', 'Requests', 'Pages'] ]
     average_chart_data = [ ['User', 'Requests', 'Pages'] ]

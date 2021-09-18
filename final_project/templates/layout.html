@@ -18,7 +18,7 @@
             <!--<li><a class="navButtons" id="pagesButton" href="#">Pages</a></li>-->
             <div id='date_menu'>
                 <form action='#' method='get'>
-                    <select name='month' title='month' style="height:30px">
+                    <select name='month' title='month' style="height:35px; width:30vw; font-size:16px; text-align:center;" onchange='this.form.submit();'>
                         <option value='01'{% if month=='01' %} selected {% endif %}>January</option>
                         <option value='02'{% if month=='02' %} selected {% endif %}>February</option>
                         <option value='03'{% if month=='03' %} selected {% endif %}>March</option>
@@ -32,7 +32,7 @@
                         <option value='11'{% if month=='11' %} selected {% endif %}>November</option>
                         <option value='12'{% if month=='12' %} selected {% endif %}>December</option>
                     </select>
-                    <input id="submitButton" type="submit" value="Go" style="height:30px;width:40px;">
+                    <!--<input id="submitButton" type="submit" value="Go" style="height:30px;width:40px;">-->
                 </form>
             </div>
             <a id="icon" href="/login"><i class="material-icons" href="/login" style="font-size:24px;color:white;padding:8px;">logout</i></a>

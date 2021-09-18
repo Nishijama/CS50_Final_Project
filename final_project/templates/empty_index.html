@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block head %}
+	<title>Dashboard</title>
+    <link rel="icon" href="/static/Icons/chart.svg">
+{% endblock %}
+
+{% block body %}
+<main>
+    <div class="container">
+        <div class="PRC">
+            <div class="PRC-content">
+                <h1 style="font-family:'Georgia';display:inline;">Nothing to see here</h1><br>
+                <button id="addFirstButton" style="font-size:24px;margin:10px 0px;padding:10px"><a>Add a new record<i style="margin:3px;" class="material-icons">add_circle_outline</i></a></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modalBg">
+      <div id="update_form">
+        <div class="close">+</div>
+
+        <form class="add_form" action="/?month={{ month }}" method="post">
+          <input name="requests" required type="number" min="0" max="999" placeholder="Requests" style="width:70px;padding:7px;">
+          <input name="pages" required type="number" min="0" max="999" placeholder="Pages" style="width:70px;padding:7px;">
+          <input name="date" required class="input_text" type="date" min="{{ year }}-01-01" max="{{ year }}-12-31" style="width:150px;">
+          <br>
+          <select required name="shift" style="width:86px;padding:7px;margin:10px 0px;border-radius:5px;">
+              <option value="" disabled selected style="color:silver;">Shift</option>
+              <option>Early</option>
+              <option>Office</option>
+              <option>Middle</option>
+              <option>Late</option>
+              <option>4x10</option>
+          </select>
+          <select required name="task" style="width:252px;padding:7px;marign:10px 0px;border-radius:5px;">
+              <option value="" disabled selected style="color:silver;">Task</option>
+              <option>Small/Medium</option>
+              <option>Assignment</option>
+              <option>Reservations</option>
+              <option>SPOC</option>
+              <option>Other</option>
+          </select>
+          <br>
+          <input class="submitButton" name="AddRecordsButton" type="submit">
+        </form>
+
+      </div>
+    </div>
+</main>
+
+
+<script>
+//-----------
+//pop-up setup
+document.getElementById('addFirstButton').addEventListener('click', function(){
+    document.querySelector('.modalBg').style.display = 'flex';
+    document.querySelector('.add_form').style.display = 'block';
+})
+
+document.querySelector('.close').addEventListener('click', function() {
+    document.querySelector('.modalBg').style.display = 'none';
+    document.querySelector('.add_form').style.display = 'none';
+})
+
+
+//------------
+document.getElementById("main_page").style.backgroundColor = "#00A9F4";
+document.getElementById("landscape").style.backgroundColor = "#051C2C";
+
+</script>
+
+{% endblock %}
