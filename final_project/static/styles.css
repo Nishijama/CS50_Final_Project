@@ -8,66 +8,227 @@
 }
 
 /*LAYOUT*/
+main{
+  height:100%;
+}
 body{
     background: #f2f2f2;
+    font-family: Arial;
+    margin:0;
 }
-
   .container {
     /*z-index:0;*/
     display: flex;
     flex-direction: row;
     background-color: rgb(5, 28, 44, 0.8);
-
+    width:100%;
+    height:100%;
   }
-
     .container div{
       /*border: 1px black solid;*/
       padding: 10px;
       margin:10px;
-      /*border-radius:20px;*/
-      /*border: 1px grey solid;*/
       background: white;
+
     }
-
-      .PRC {
-      flex: 3;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-      height: 800px;
-      text-align: center;
-      }
-
-      .TasksAndShifts {
-      flex: 1;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-      height: 800px;
-      position: relative;
-      }
-
-        .chart-container {
-          text-align: center;
+      /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+      @media screen and (max-width: 1350px) {
+        #main_table {
+        display:none;
         }
-          img {
-            max-width: 100%;
-            object-fit: contain;
+      }
+
+      /*Phone layout*/
+      @media screen and (max-width: 800px) {
+      .container {
+        flex-direction: column;
+        }
+        .PRC {
+          flex: 100%;
+          max-width: 100%;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        }
+        .TasksAndShifts {
+          flex: 100%;
+          max-width: 100%;
+          display:flex;
+          flex-direction: column;
+          position: relative;
+          margin:0;
+          padding:0;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        }
+        #topStats {
+          /*border: 1px black solid;*/
+          display:flex;
+          flex-direction: row;
+          justify-content: center;
+          margin-top: 10px;
           }
-        #prcImage {
-        height: 500px;
+        .topStat {
+          border: 1px silver solid;
+          border-radius:5px;
+          width:30vw;
+          font-size: 18px;
+          font-weight: bold;
+          /*color: var(--acc2);*/
+          padding:10px;
+          margin: 0px 30px;
         }
 
-        #tasksContent {
-          /*height:5;*/
+        .bigStat {
+          display: inline-block;
+          font-family:'Times';
+          font-size: 32px;
+          font-weight: bold;
+          color: var(--acc3);
+        }
+      }
+
+      @media screen and (min-width: 800px) {
+        .PRC {
+        flex:70%;
+        max-width: 70%;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        }
+        .TasksAndShifts {
+        flex:25%;
+        max-width: 25%;
+        display:flex;
+        flex-direction: column;
+        position: relative;
+        margin:0;
+        padding:0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
         }
 
-        #tasksImage {
-          height: 200px;
+        #topStats {
+          /*border: 1px black solid;*/
+          padding:0px;
+          display:flex;
+          flex-direction: row;
+          justify-content: center;
+          margin: 0;
+          margin-top: 30px;
         }
-        #shiftsContent {
-          /*height:4;*/
+        .topStat {
+          border: 1px silver solid;
+          border-radius:5px;
+          font-size: 16px;
+          font-weight: bold;
+          /*color: var(--acc2);*/
+          padding:24px;
+          margin: 0px 30px;
         }
 
-        #shiftsImage {
-          height: 200px;
+        .bigStat {
+          display: inline;
+          font-family:'Times';
+          font-size: 36px;
+          font-weight: bold;
+          color: var(--acc3);
         }
+      }
+
+       #reqButton {
+        text-decoration: none;
+        margin:5px 5px 5px 0px;
+        padding:10px 0px 5px 0px;
+        border-bottom: 3px solid blue;
+      }
+
+      #pagesButton {
+        text-decoration: none;
+        margin:5px 5px 5px 5px;
+        padding:10px 0px 5px 0px;
+        border-bottom: 2px solid silver;
+      }
+
+
+
+        .TasksAndShifts div {
+            margin:5px;
+            padding:5px;
+        }
+
+        #statistics_chart_container {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin:20px 0px 0px 0px;
+        padding:0;
+        height:500px;
+        }
+
+        #statistics_chart_container div{
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin:0px;
+        padding:0;
+        height:100%;
+        }
+        div #chart_div {
+          height:0px;
+        }
+
+        .pie _chart_container {
+          display:flex;
+          align-items: center;
+        }
+
+        .pie_chart_container div{
+          margin:0;
+          padding:0;
+          height:100%;
+        }
+
+      #tasksPiechart, #shiftsPiechart {
+      width:100%;
+      height: 100%;
+      }
+        #columnchart_material {
+        height:500px;
+        max-width: 100%;
+        margin:0;
+        padding:0;
+      }
+
+      #columnchart_material div{
+        height:500px;
+        max-width: 100%;
+        margin:0;
+        padding:0;
+      }
+      #tableContainer {
+      align-items: center;
+      justify-content: center;
+      margin:10px 0px;
+      padding:0;
+      width:100%;
+      }
+
+      table {
+          width:100%;
+      }
+        table, th, td {
+          border: 1px solid silver;
+          border-collapse:collapse;
+        }
+        table th {
+          text-align: left;
+          background-color: var(--acc1);
+          color:white;
+          padding:5px;
+          width: 150px;
+        }
+
+        table td {
+          text-align: center;
+          color: gray;
+          min-width: 25px;
+        }
+
 
 /*NAVBAR*/
 
@@ -75,7 +236,7 @@ nav {
   display: flex;
   flex-direction: column;
 }
-  ul {
+  nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -83,12 +244,12 @@ nav {
     background-color: var(--acc1);
   }
 
-  li {
+  nav li {
     float: left;
 
   }
 
-  li a, p {
+  nav li a, p {
     display: block;
     color: white;
     text-align: center;
@@ -97,26 +258,24 @@ nav {
     padding: 14px 16px;
     text-decoration: none;
   }
+  .
 
   .active_button {
     background-color: blue;
     background-color: var(--acc3);
   }
 
-  li a:hover {
+  nav li a:hover {
     background-color: blue;
     background-color: var(--acc2);
     }
 
-  .date-menu {
-    margin: auto;
-    width: 400px;
-  }
-
-  #date {
-      background: white;
-      color: black;
-      width: 200px;
+  #date_menu {
+    width:200px;
+    margin:5px;
+    text-align:center;
+    justify-content:center;
+    display: inline-block;
   }
 
   #icon{
@@ -157,6 +316,25 @@ nav {
     display: block;
   }
 
+  #editButton i {
+    font-size: 24px;
+    padding: 3px;
+  }
+
+  #addButton, #removeButton {
+    color: silver;
+    float: right;
+    padding: 5px;
+    margin:2px;
+    border-radius :5px;
+    cursor: pointer;
+    border: 1px silver solid;
+
+  }
+  #addButton:hover, #removeButton:hover {
+    border: 1px #00A9F4 solid;
+    color: #00A9F4;
+  }
 
 input {
  border: 1px #00A9F4 solid;
@@ -171,8 +349,8 @@ hr {
 }
 
 .modalBg {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
   top:0;
   left: 0;
@@ -183,17 +361,27 @@ hr {
 #update_form {
   margin: auto;
   padding: 40px 20px;
-  width: 330px;
+  width: 400px;
   border: 1px #00A9F4 solid;
   background-color: #051C2C;
   position: relative;
 }
+.add_form {
+ margin:auto;
+ width:345px;
+}
+.remove_form {
+ margin:auto;
+ width:345px;
+}
 
 .submitButton {
+  width:345px;
   padding: 8px;
   background-color: var(--acc2);
   color: white;
   border-radius:5px;
+  margin: 10px 0px;
 }
 
 .close {
@@ -204,4 +392,66 @@ hr {
   top:0;
   right: 8px;
   cursor:pointer;
+}
+
+/*LANDSCAPE*/
+
+@media screen and (min-width: 800px) {
+  #landscape_container {
+    flex-direction:row;
+    justify-content: space-around;
+  }
+  .landscape_chart_container {
+    flex: 50%;
+    max-width:50%;
+  }
+  #landscape_chart {
+    height:500px;
+
+  }
+
+  #landscape_chart div{
+    margin:0;
+    padding:0;
+  }
+
+  #average_chart {
+    height:500px;
+
+  }
+
+  #average_chart div{
+    margin:0;
+    padding:0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #landscape_container {
+    flex-direction:column;
+    justify-content: space-around;
+  }
+  .landscape_chart_container {
+    flex: 100%;
+    max-width:100%;
+  }
+  #landscape_chart {
+    height:500px;
+
+  }
+
+  #landscape_chart div{
+    margin:0;
+    padding:0;
+  }
+
+  #average_chart {
+    height:500px;
+
+  }
+
+  #average_chart div{
+    margin:0;
+    padding:0;
+  }
 }

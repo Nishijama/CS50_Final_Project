@@ -1,7 +1,22 @@
 {% extends "secondaryLayout.html" %}
 
+{% block head %}
+	<title>Oops!</title>
+    <link rel="icon" href="/static/Icons/emoji.svg">
+{% endblock %}
+
 {% block body %}
 
-<img alt="{{ top }}" class="border" src="http://memegen.link/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg?alt=https://i.imgur.com/CsCgN7Ll.png" title="{{ top }}">
+<img src="/static/Icons/alert.svg" style="height:100px;width:auto;">
+<h1 style="color:var(--acc2); display:inline; padding:10px; margin-bottom:30px;">{{ code }}</h1>
+<h2>{{ message }}</h2>
+
+<button onclick="goBack()">Go Back</button>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
 
 {% endblock %}

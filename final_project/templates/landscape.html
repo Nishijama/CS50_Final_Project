@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block head %}
+	<title>Landscape</title>
+	<link rel="icon" href="/static/Icons/globe1.svg">
+{% endblock %}
+
+{% block body %}
+
+<div class="container" id="landscape_container">
+    <div class=landscape_chart_container>
+        <h1>Totals:</h1>
+        <div id="landscape_chart"></div>
+    </div>
+    <div class=landscape_chart_container>
+        <h1>Averages:</h1>
+        <div id="average_chart"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+    document.getElementById("landscape").style.backgroundColor = "#00A9F4";
+    document.getElementById("main_page").style.backgroundColor = "#051C2C";
+    // document.getElementById("landscape").innerHTML = 'Main page';
+    // document.getElementById("landscape").href = '/?month={{month}}';
+    // document.getElementById("reqButton").style.display = 'none';
+    // document.getElementById("pagesButton").style.display = 'none';
+
+    google.charts.load('current', {'packages':['bar']});
+
+    google.charts.setOnLoadCallback(drawLandscapeChart);
+
+    function drawLandscapeChart() {
+      var data = google.visualization.arrayToDataTable(
+          {{ landscape_chart_data|tojson|safe }}
+      );
+
+      var options = {
+        chart: {
+          title: 'Total number requests and pages'},
+          colors: ['#051C2C', '#50606B'],
+          legend: {position: 'none'}
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('landscape_chart'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+    google.charts.setOnLoadCallback(drawAverageChart);
+    function drawAverageChart() {
+      var data = google.visualization.arrayToDataTable(
+          {{ average_chart_data|tojson|safe }}
+      );
+
+      var options = {
+        chart: {
+          title: 'Average number of requests and pages'},
+          colors: ['#051C2C', '#50606B'],
+          legend: {position: 'none'}
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('average_chart'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+function resize () {
+  drawLandscapeChart();
+  drawAverageChart();
+  }
+window.onload = resize;
+window.onresize = resize;
+
+</script>
+{% endblock %}

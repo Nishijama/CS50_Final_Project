@@ -47,3 +47,29 @@ a {
     text-decoration:none;
     color: gray;
 }
+
+@media screen and (max-width: 990px) {
+    h1 {
+        font-size:64px;
+    }
+    h2 {
+        font-size:48px;
+    }
+    .loginBox {
+    background-color: white;
+    width:80%;
+    }
+    .input {
+    height:72px;
+    width: 90%;
+    font-size: 48px;
+    margin:10px;
+    padding:10px;
+    }
+    a {
+        font-size:36px;
+    }
+    #logInButton {
+        width:95%;
+    }
+}

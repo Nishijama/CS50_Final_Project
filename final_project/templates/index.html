@@ -1,32 +1,119 @@
 {% extends "layout.html" %}
+{% block head %}
+	<title>Dashboard</title>
+    <link rel="icon" href="/static/Icons/chart.svg">
+{% endblock %}
 
 {% block body %}
 <main>
     <div class="container">
         <div class="PRC">
             <div class="PRC-content">
-                <h1>PRC</h1>
-                <div class=chart-container>
-                    <img id="prcImage" src="static/placeholder.png" alt="PRC chart">
-                    <!--<div id="PRCchart" style="width: 100%; float:left"></div>-->
+                <h1 style="font-family:'Georgia';display:inline;">PRC</h1>
+                <button id="addButton">
+                <i class="material-icons">add_circle_outline</i></button>
+
+                <button id="removeButton">
+                <i class="material-icons">remove_circle_outline</i></button><br>
+                <br><a id="reqButton" href="#">Requests</a>
+                <a id="pagesButton" href="#">Pages</a>
+
+                <div id='topStats'>
+                    <div class="topStat">Total:<div class="bigStat" id="bigStatTotal">{{ topStatReqTotal }}</div></div>
+                    <div class="topStat">Average: <div class="bigStat" id="bigStatAverage">{{ topStatReqAvg }}</div></div>
+                </div>
+                <div id="statistics_chart_container">
+                    <div id="columnchart_material"></div>
+                        <div id="chart_div"></div>
+                </div>
+                <div id="tableContainer" style="display:flex;">
+                <br>
+                <table id='main_table'>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            {% for row in statisticsQuery %}
+                                <td><strong>{{ row["date"][-2:] }}</strong>  </td>
+                            {% else %}
+                                <td><strong>{{ "No records" }}</strong>  </td>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Requests</th>
+                            {% for row in statisticsQuery %}
+                                {% if row["requests"] != None %}
+                                    <td style="color: var(--acc2); font-weight:bold;"> {{ row["requests"] }} </td>
+                                {% else %}
+                                    <td>0</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>Pages</th>
+                            {% for row in statisticsQuery %}
+                                {% if row["pages"] != None %}
+                                    <td style="color: var(--acc2); font-weight:bold;"> {{ row["pages"] }} </td>
+                                {% else %}
+                                    <td>0</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+
+                    </tbody>
+                </table>
                 </div>
             </div>
-            <input id="editButton" type="button" value="Add records" style="font-size: 26px;padding:20px;font-weight:bold;color:#00A9F4;border-radius:20px;cursor:pointer;">
         </div>
         <div class="TasksAndShifts">
             <div id="tasksContent">
-                <h1>Tasks</h1>
-                <div class=chart-container>
-                    <img id="tasksImage" src="static/tasks-chart.PNG" alt="Tasks chart">
-                    <!--<div id="Taskschart" style="width: 100%; float:left"></div>-->
+                <h1 style="font-family:'Georgia'">Tasks</h1>
+                <div class=pie_chart_container>
+                    <div>
+                        <div id="tasksPiechart"></div>
+                    </div>
+                    <!--<table>-->
+                    <!--    <thead>-->
+                    <!--        <tr>-->
+                    <!--            <th>Task</th>-->
+                    <!--            <th>Count</th>-->
+                    <!--        </tr>-->
+                    <!--    </thead>-->
+                    <!--    <tbody>-->
+                    <!--            {% for row in tasksQuery %}-->
+                    <!--            <tr>-->
+                    <!--                <td> {{ row["task"] }} </td>-->
+                    <!--                <td> {{ row["COUNT(user_id)"] }} </td>-->
+                    <!--            </tr>-->
+                    <!--            {% endfor %}-->
+                    <!--    </tbody>-->
+                    <!--</table>-->
                 </div>
             </div>
             <div><hr></div>
             <div id="shiftsContent">
-                <h1>Shifts</h1>
-                <div class=chart-container>
-                    <img id="shiftsImage" src="static/shifts-chart.PNG" alt="Shifts chart">
-                    <!--<div id="Taskschart" style="width: 100%; float:left"></div>-->
+                <h1 style="font-family:'Georgia'">Shifts</h1>
+                <div class=pie_chart_container>
+                    <div>
+                        <div id="shiftsPiechart"></div>
+                    </div>
+                    <!--<table>-->
+                    <!--    <thead>-->
+                    <!--        <tr>-->
+                    <!--            <th>Shift</th>-->
+                    <!--            <th>Count</th>-->
+                    <!--        </tr>-->
+                    <!--    </thead>-->
+                    <!--    <tbody>-->
+                    <!--            {% for row in shiftsQuery %}-->
+                    <!--            <tr>-->
+                    <!--                <td> {{ row["shift"] }} </td>-->
+                    <!--                <td> {{ row["COUNT(user_id)"] }} </td>-->
+                    <!--            </tr>-->
+                    <!--            {% endfor %}-->
+                    <!--    </tbody>-->
+                    <!--</table>-->
                 </div>
             </div>
         </div>
@@ -35,19 +122,227 @@
     <div class="modalBg">
       <div id="update_form">
         <div class="close">+</div>
-      <form>
 
-          <input type="number" placeholder="Requests" style="width:70px;padding:7px;">
-          <input type="number" placeholder="Pages" style="width:70px;padding:7px;">
-          <input class="input_text" type="date" placeholder="Day" style="width:70px;">
-          <input class="submitButton" type="submit">
-        <hr>
-        <input type="button" value="Choose a file" style="width:110px;">
-        <input type="text" placeholder="File path"style="width:132px;">
-        <input class="submitButton" type="submit">
+        <form class="add_form" action="/?month={{ month }}" method="post">
+          <input name="requests" required type="number" min="0" placeholder="Requests" style="width:70px;padding:7px;">
+          <input name="pages" required type="number" min="0" placeholder="Pages" style="width:70px;padding:7px;">
+          <input name="date" required class="input_text" type="date" min="{{ year }}-01-01" max="{{ year }}-12-31" style="width:150px;">
+          <br>
+          <select name="shift" style="width:86px;padding:7px;margin:10px 0px;border-radius:5px;">
+              <option>Early</option>
+              <option>Office</option>
+              <option>Middle</option>
+              <option>Late</option>
+              <option>4x10</option>
+          </select>
+          <select name="task" style="width:252px;padding:7px;marign:10px 0px;border-radius:5px;">
+              <option>Small/Medium</option>
+              <option>Assignment</option>
+              <option>Reservations</option>
+              <option>SPOC</option>
+              <option>Other</option>
+          </select>
+          <br>
+          <input class="submitButton" name="AddRecordsButton" type="submit">
+        </form>
+
+        <form class="remove_form" action="/?month={{ month }}" method="post">
+          <select name="records" style="width:345px;padding:7px;margin:10px 0px;border-radius:5px;">
+            {% for row in statisticsQuery %}
+            {%if row["task"] and row["shift"] != None %}
+            <option> {{ row["date"] + ' — ' + row["task"] + ' — ' + row["shift"] }} </option>
+            {% endif %}
+            {% endfor %}
+          </select>
+          <input class="submitButton" type="submit" name="RemoveRecordsButton" value="Delete">
         </form>
       </div>
     </div>
 </main>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+//-----------
+//pop-up setup
+document.getElementById('addButton').addEventListener('click', function(){
+    document.querySelector('.modalBg').style.display = 'flex';
+    document.querySelector('.add_form').style.display = 'block';
+    document.querySelector('.remove_form').style.display = 'none';
+})
+
+document.getElementById('removeButton').addEventListener('click', function(){
+    document.querySelector('.modalBg').style.display = 'flex';
+    document.querySelector('.add_form').style.display = 'none';
+    document.querySelector('.remove_form').style.display = 'block';
+})
+
+document.querySelector('.close').addEventListener('click', function() {
+    document.querySelector('.modalBg').style.display = 'none';
+    document.querySelector('.add_form').style.display = 'none';
+    document.querySelector('.remove_form').style.display = 'none';
+})
+
+
+//------------
+document.getElementById("main_page").style.backgroundColor = "#00A9F4";
+document.getElementById("landscape").style.backgroundColor = "#051C2C";
+//Google charts setup - column chart
+
+google.charts.load('current', {'packages':['bar', 'corechart']});
+
+//
+//requests/pages settup
+var type = 'requests';
+document.getElementById("pagesButton").style.color = "silver";
+document.getElementById("pagesButton").style.fontWeight = "normal";
+document.getElementById("reqButton").style.color = "black";
+document.getElementById("reqButton").style.fontWeight = "bold";
+
+//
+// Pages chart
+
+google.charts.setOnLoadCallback(drawPagesChart);
+function drawPagesChart() {
+  var data = google.visualization.arrayToDataTable(
+      {{ statistics_chart_pages_data|tojson|safe }}
+  );
+
+  var options = {
+    chart: {
+      title: 'Number of PRCed pages',
+      subtitle: ''},
+      colors: ['#50606B', '#051C2C'],
+      legend: {position: 'none'}
+  };
+
+  var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+  chart.draw(data, google.charts.Bar.convertOptions(options));
+};
+
+//
+// Requests chart
+google.charts.setOnLoadCallback(drawRequestsChart);
+function drawRequestsChart() {
+  var data = google.visualization.arrayToDataTable(
+      {{ statistics_chart_requests_data|tojson|safe }}
+  );
+
+  var options = {
+    chart: {
+      title: 'Number of PRCed requests',
+      subtitle: ''},
+      colors: ['#051C2C', '#50606B'],
+      legend: {position: 'none'}
+  };
+
+  var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+  chart.draw(data, google.charts.Bar.convertOptions(options));
+};
+
+document.getElementById('reqButton').addEventListener('click', function(){
+document.getElementById("pagesButton").style.color = "silver";
+document.getElementById("pagesButton").style.fontWeight = "normal";
+document.getElementById("pagesButton").style.borderBottom = "2px solid silver";
+document.getElementById("reqButton").style.color = "black";
+document.getElementById("reqButton").style.fontWeight = "bold";
+document.getElementById("reqButton").style.borderBottom = "3px solid blue";
+document.getElementById("bigStatTotal").innerHTML = {{ topStatReqTotal }};
+// https://www.codegrepper.com/code-examples/javascript/format+zero+number+after+dot+js
+document.getElementById("bigStatAverage").innerHTML = parseFloat({{ topStatReqAvg }}).toFixed(1);
+drawRequestsChart();
+type = 'requests';
+});
+
+document.getElementById('pagesButton').addEventListener('click', function() {
+document.getElementById("reqButton").style.color = "silver";
+document.getElementById("reqButton").style.fontWeight = "normal";
+document.getElementById("reqButton").style.borderBottom = "2px solid silver";
+document.getElementById("pagesButton").style.color = "black";
+document.getElementById("pagesButton").style.fontWeight = "bold";
+document.getElementById("pagesButton").style.borderBottom = "3px solid blue";
+document.getElementById("bigStatTotal").innerHTML = {{ topStatPageTotal }};
+document.getElementById("bigStatAverage").innerHTML = parseFloat({{ topStatPageAvg }}).toFixed(1);
+drawPagesChart();
+type = 'pages';
+});
+
+
+
+
+// Tasks chart
+
+google.charts.setOnLoadCallback(drawTasksChart);
+function drawTasksChart() {
+
+        // Create the data table for Anthony's pizza.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows(
+            {{ tasks_chart_data|tojson|safe }}
+        );
+
+        // Set options for Anthony's pie chart.
+        var options = { pieHole: 0.5,
+                        legend: {position: 'labeled', textStyle: {color: 'blue', fontSize: 16}},
+                        pieSliceText: 'none',
+                        colors: [
+                                    '#051C2C',
+                                    '#00A9F4',
+                                    '#1F40E6',
+                                    '#AAE6F0'
+                                ],
+                        chartArea:{left:10,top:10,width:'100%',height:'90%'}
+        };
+
+    var chart = new google.visualization.PieChart(document.getElementById('tasksPiechart'));
+    chart.draw(data, options);
+  }
+
+// Shifts chart
+google.charts.setOnLoadCallback(drawShiftsChart);
+function drawShiftsChart() {
+
+        // Create the data table for Anthony's pizza.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows(
+            {{ shifts_chart_data|tojson|safe }}
+        );
+
+        // Set options for Anthony's pie chart.
+        var options = { pieHole: 0.5,
+                        legend: {position: 'labeled', textStyle: {color: 'blue', fontSize: 16}},
+                        pieSliceText: 'none',
+                        colors: [
+                                    '#034A6E',
+                                    '#007FB7',
+                                    '#5FCEFF',
+                                    '#95DEFF'
+                                ],
+                        chartArea:{left:10,top:10, width:'100%',height:'90%'}
+        };
+    var chart = new google.visualization.PieChart(document.getElementById('shiftsPiechart'));
+    chart.draw(data, options);
+
+}
+
+function resize () {
+    if (type == "requests") {
+     drawRequestsChart();
+    } else {
+     drawPagesChart();
+    }
+    drawShiftsChart();
+    drawTasksChart();
+    }
+window.onload = resize;
+window.onresize = resize;
+
+
+</script>
 
 {% endblock %}
