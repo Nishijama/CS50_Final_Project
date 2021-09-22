@@ -285,27 +285,34 @@ def register():
 @login_required
 def landscape():
 
+    user_id = session["user_id"]
     # Prepare dates
     month = str(request.args.get("month"))
     first_of_month = (str(year) + '-' + month + '-01')
     last_of_month = (str(year) + '-' + month + str(monthrange(year, int(month))[1]))
 
     # Query database for data for charts
-    landscapeQuery = db.execute("SELECT users.name, SUM(statistics.requests) AS rTotal, "
+    landscapeQuery = db.execute("SELECT users.id, users.name, SUM(statistics.requests) AS rTotal, "
                                 "ROUND(AVG(statistics.requests), 2) AS rAverage, SUM(statistics.pages) AS pTotal, "
                                 "ROUND(AVG(statistics.pages), 2) AS pAverage "
                                 "FROM users "
                                 "LEFT OUTER JOIN statistics ON statistics.user_id = users.id "
                                 "AND statistics.date BETWEEN ? AND ? "
-                                "GROUP BY users.id;", first_of_month, last_of_month)
+                                "GROUP BY users.id "
+                                "ORDER BY rTotal ", first_of_month, last_of_month)
+    print(type(landscapeQuery))
     print(landscapeQuery)
     # Prepare data for the charts
     landscape_chart_data = [ ['User', 'Requests', 'Pages'] ]
     average_chart_data = [ ['User', 'Requests', 'Pages'] ]
 
     for row in landscapeQuery:
-        landscape_chart_data.extend([[row["name"], row["rTotal"], row["pTotal"]]])
-        average_chart_data.extend([[row["name"], row["rAverage"], row["pAverage"]]])
+        if row["id"] == user_id:
+            landscape_chart_data.extend([[row["name"], row["rTotal"], row["pTotal"]]])
+            average_chart_data.extend([[row["name"], row["rAverage"], row["pAverage"]]])
+        else:
+            landscape_chart_data.extend([[" ", row["rTotal"], row["pTotal"]]])
+            average_chart_data.extend([[" ", row["rAverage"], row["pAverage"]]])
 
     # Return template
     return render_template("landscape.html", month=month, landscapeQuery=landscapeQuery,

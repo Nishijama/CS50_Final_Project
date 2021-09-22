@@ -7,7 +7,7 @@
 --acc5: #3C96B4;
 }
 
-/*LAYOUT*/
+/*INDEX*/
 main{
   height:100%;
 }
@@ -16,6 +16,9 @@ body{
     font-family: Arial;
     margin:0;
 }
+h1 {
+  font-family:'Georgia';display:inline;
+}
   .container {
     /*z-index:0;*/
     display: flex;
@@ -23,14 +26,20 @@ body{
     background-color: rgb(5, 28, 44, 0.8);
     width:100%;
     height:100%;
+    min-height:100vh;
   }
     .container div{
       /*border: 1px black solid;*/
       padding: 10px;
       margin:10px;
       background: white;
-
     }
+    .container .internal_container {
+          margin:10px;
+          padding:10px;
+          /*background:pink;*/
+        }
+
       /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
       @media screen and (max-width: 1350px) {
         #main_table {
@@ -57,6 +66,11 @@ body{
           margin:0;
           padding:0;
           box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        }
+        .internal_content {
+          margin:10px;
+          padding:10px;
+          background:pink;
         }
         #topStats {
           /*border: 1px black solid;*/
@@ -392,66 +406,4 @@ hr {
   top:0;
   right: 8px;
   cursor:pointer;
-}
-
-/*LANDSCAPE*/
-
-@media screen and (min-width: 800px) {
-  #landscape_container {
-    flex-direction:row;
-    justify-content: space-around;
-  }
-  .landscape_chart_container {
-    flex: 50%;
-    max-width:50%;
-  }
-  #landscape_chart {
-    height:500px;
-
-  }
-
-  #landscape_chart div{
-    margin:0;
-    padding:0;
-  }
-
-  #average_chart {
-    height:500px;
-
-  }
-
-  #average_chart div{
-    margin:0;
-    padding:0;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  #landscape_container {
-    flex-direction:column;
-    justify-content: space-around;
-  }
-  .landscape_chart_container {
-    flex: 100%;
-    max-width:100%;
-  }
-  #landscape_chart {
-    height:500px;
-
-  }
-
-  #landscape_chart div{
-    margin:0;
-    padding:0;
-  }
-
-  #average_chart {
-    height:500px;
-
-  }
-
-  #average_chart div{
-    margin:0;
-    padding:0;
-  }
 }

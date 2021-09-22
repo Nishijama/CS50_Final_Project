@@ -5,7 +5,7 @@
         <!--import Google Charts API-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--import stylesheet-->
-        <link href='/static/styles.css' rel="stylesheet">
+        <link href='/static/styles/styles.css' rel="stylesheet">
         {%block head%}{%endblock%}
 
     </head>
@@ -18,7 +18,7 @@
             <!--<li><a class="navButtons" id="pagesButton" href="#">Pages</a></li>-->
             <div id='date_menu'>
                 <form action='#' method='get'>
-                    <select name='month' title='month' style="height:35px; width:30vw; font-size:16px; text-align:center;" onchange='this.form.submit();'>
+                    <select id="month_form" name='month' title='month' style="height:35px; width:30vw; font-size:16px; text-align:center;" onchange='this.form.submit();'>
                         <option value='01'{% if month=='01' %} selected {% endif %}>January</option>
                         <option value='02'{% if month=='02' %} selected {% endif %}>February</option>
                         <option value='03'{% if month=='03' %} selected {% endif %}>March</option>

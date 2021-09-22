@@ -2,15 +2,22 @@
 {% block head %}
 	<title>Dashboard</title>
     <link rel="icon" href="/static/Icons/chart.svg">
+    <link rel="stylesheet" href='/static/styles/empty_indexStyles.css'>
 {% endblock %}
 
 {% block body %}
 <main>
     <div class="container">
-        <div class="PRC">
-            <div class="PRC-content">
-                <h1 style="font-family:'Georgia';display:inline;">Nothing to see here</h1><br>
-                <button id="addFirstButton" style="font-size:24px;margin:10px 0px;padding:10px"><a>Add a new record<i style="margin:3px;" class="material-icons">add_circle_outline</i></a></button>
+        <div id='empty_window'>
+            <div class="internal_container">
+                <div id=firstButtonContainer>
+                    <h1 id="heading1" style="margin:auto;">No records yet</h1><br>
+                    <img id="empty_image" style="width:200px;height:auto;margin:auto;" src="/static/pulp-fiction-john-travolta.gif"><br>
+                    <button id="addFirstButton">
+                        <a style="margin:3px;font-size:24px;">Add a new record</a>
+                        <i style="margin:3px;font-size:32px;" class="material-icons">add_circle_outline</i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -18,7 +25,6 @@
     <div class="modalBg">
       <div id="update_form">
         <div class="close">+</div>
-
         <form class="add_form" action="/?month={{ month }}" method="post">
           <input name="requests" required type="number" min="0" max="999" placeholder="Requests" style="width:70px;padding:7px;">
           <input name="pages" required type="number" min="0" max="999" placeholder="Pages" style="width:70px;padding:7px;">
@@ -67,6 +73,22 @@ document.querySelector('.close').addEventListener('click', function() {
 document.getElementById("main_page").style.backgroundColor = "#00A9F4";
 document.getElementById("landscape").style.backgroundColor = "#051C2C";
 
+// function() {
+    // var e = document.getElementById("month_form");
+    // var strUser = e.options[e.selectedIndex].text;
+    if (document.getElementById("month_form").options[month_form.selectedIndex].text== "November") {
+        document.getElementById("empty_image").src="/static/thatsallfolks.jpeg"
+        document.getElementById("empty_image").style.width = "500px";
+        document.getElementById("addFirstButton").style.display = 'none';
+        document.getElementById("heading1").style.display = 'none';
+    }
+    if (document.getElementById("month_form").options[month_form.selectedIndex].text== "December") {
+        document.getElementById("empty_image").src="/static/ThisWasCS50.png"
+        document.getElementById("empty_image").style.width = "500px";
+        document.getElementById("addFirstButton").style.display = 'none';
+        document.getElementById("heading1").style.display = 'none';
+    }
+// }
 </script>
 
 {% endblock %}

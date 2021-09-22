@@ -1,0 +1,62 @@
+/*LANDSCAPE*/
+
+@media screen and (min-width: 800px) {
+  #landscape_container {
+    flex-direction:row;
+    justify-content: space-around;
+  }
+  .landscape_chart_container {
+    flex: 50%;
+    max-width:50%;
+  }
+  #landscape_chart {
+    height:500px;
+
+  }
+
+  #landscape_chart div{
+    margin:0;
+    padding:0;
+  }
+
+  #average_chart {
+    height:500px;
+
+  }
+
+  #average_chart div{
+    margin:0;
+    padding:0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #landscape_container {
+    flex-direction:column;
+    justify-content: space-around;
+  }
+  .landscape_chart_container {
+    flex: 100%;
+    max-width:100%;
+  }
+  #landscape_chart {
+    height:500px;
+
+  }
+
+  #landscape_chart div{
+    margin:0;
+    padding:0;
+  }
+
+  #average_chart {
+    height:500px;
+
+  }
+
+  #average_chart div{
+    margin:0;
+    padding:0;
+  }
+}
+

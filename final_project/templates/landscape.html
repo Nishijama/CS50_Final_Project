@@ -3,19 +3,26 @@
 {% block head %}
 	<title>Landscape</title>
 	<link rel="icon" href="/static/Icons/globe1.svg">
+  <link rel="stylesheet" href='/static/styles/landscapeStyles.css'>
 {% endblock %}
 
 {% block body %}
 
 <div class="container" id="landscape_container">
-    <div class=landscape_chart_container>
+
+  <div class=landscape_chart_container>
+     <div class="internal_container">
         <h1>Totals:</h1>
         <div id="landscape_chart"></div>
     </div>
-    <div class=landscape_chart_container>
+  </div>
+
+  <div class=landscape_chart_container>
+     <div class="internal_container">
         <h1>Averages:</h1>
         <div id="average_chart"></div>
     </div>
+  </div>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -41,7 +48,8 @@
         chart: {
           title: 'Total number requests and pages'},
           colors: ['#051C2C', '#50606B'],
-          legend: {position: 'none'}
+          legend: {position: 'none'},
+          hAxis: {titleTextStyle: {color: 'white'}},
       };
 
       var chart = new google.charts.Bar(document.getElementById('landscape_chart'));
@@ -59,7 +67,8 @@
         chart: {
           title: 'Average number of requests and pages'},
           colors: ['#051C2C', '#50606B'],
-          legend: {position: 'none'}
+          legend: {position: 'none'},
+          hAxis: {titleTextStyle: {color: 'white'}},
       };
 
       var chart = new google.charts.Bar(document.getElementById('average_chart'));
