@@ -54,7 +54,7 @@ landing_page = "/?month=" + current_month
 
 
 @app.route("/", methods=["GET", "POST"])
-@login_required
+# @login_required
 def index():
 
     user_id = session["user_id"]
@@ -282,7 +282,7 @@ def register():
         return redirect(landing_page)
 
 @app.route("/landscape", methods=["GET"])
-@login_required
+# @login_required
 def landscape():
 
     user_id = session["user_id"]
@@ -319,7 +319,7 @@ def landscape():
                             landscape_chart_data=landscape_chart_data, average_chart_data=average_chart_data)
 
 @app.route("/users", methods=["GET", "POST"])
-@login_required
+# @login_required
 def users():
     # Display registered users for debugging
     rows = db.execute("SELECT * FROM users")
